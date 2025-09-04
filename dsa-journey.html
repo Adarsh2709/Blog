@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>My DSA Journey So Far ⚡ • My Blog</title>
+	<meta name="description" content="A refined, practical snapshot of DSA fundamentals: arrays, strings, recursion, bits, linked lists, sorting, binary search, stacks/queues, plus what's next.">
+	<link rel="icon" href="favicon.ico">
+	<style>
+		:root { --blend: 65%; --dark-bg:#0a0a0a; --dark-card:#0a0a0a; --dark-text:#e6e6e6; --dark-muted:#a3a3a3; --dark-brand:#4ade80; --dark-brand-2:#22c55e; --dark-border:#1f2937; --dark-accent:#0f172a; --hack-bg:#000; --hack-card:#000; --hack-text:#00ff88; --hack-muted:#56c58f; --hack-brand:#00ff88; --hack-brand-2:#00cc66; --hack-border:#024d2e; --hack-accent:#001a0f; --bg:color-mix(in oklab,var(--hack-bg) var(--blend),var(--dark-bg)); --card:color-mix(in oklab,var(--hack-card) var(--blend),var(--dark-card)); --text:color-mix(in oklab,var(--hack-text) var(--blend),var(--dark-text)); --muted:color-mix(in oklab,var(--hack-muted) var(--blend),var(--dark-muted)); --brand:color-mix(in oklab,var(--hack-brand) var(--blend),var(--dark-brand)); --brand-2:color-mix(in oklab,var(--hack-brand-2) var(--blend),var(--dark-brand-2)); --border:color-mix(in oklab,var(--hack-border) var(--blend),var(--dark-border)); --accent:color-mix(in oklab,var(--hack-accent) var(--blend),var(--dark-accent)); --shadow:0 0 24px rgba(0,255,136,.20); --radius:14px; --radius-sm:10px; --maxw:1080px }
+		@media (prefers-color-scheme: light){:root{--blend:55%}}
+		*{box-sizing:border-box} html,body{height:100%}
+		body{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono","Courier New",monospace;background:var(--bg);color:var(--text);line-height:1.6;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+		body::before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,color-mix(in oklab,var(--brand) 18%,transparent) 0 1px,transparent 1px 3px);mix-blend-mode:screen}
+		body::after{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.6) 100%)}
+		a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+		.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+		.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(4px);background:color-mix(in oklab,var(--bg) 70%,transparent);border-bottom:1px solid var(--border);box-shadow:0 0 12px color-mix(in oklab,var(--brand) 12%,transparent)}
+		.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+		.brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px;text-shadow:0 0 2px var(--brand),0 0 10px color-mix(in oklab,var(--brand) 35%,transparent)}
+		.brand-mark{width:28px;height:28px;border-radius:6px;background:radial-gradient(35% 35% at 30% 30%,var(--brand) 0%,color-mix(in oklab,var(--brand-2) 70%,black) 100%);border:1px solid var(--brand);box-shadow:0 0 10px color-mix(in oklab,var(--brand) 50%,transparent),inset 0 0 8px color-mix(in oklab,var(--brand) 40%,transparent)}
+		.nav-links{display:flex;gap:18px}
+		.nav-links a{color:var(--muted);padding:8px 10px;border-radius:6px;transition:color .15s,background .15s,box-shadow .15s}
+		.nav-links a:hover{color:var(--text);background:var(--accent);box-shadow:0 0 10px color-mix(in oklab,var(--brand) 20%,transparent);text-shadow:0 0 6px color-mix(in oklab,var(--brand) 35%,transparent)}
+		.blog-header{padding:72px 0 36px;text-align:center}
+		.blog-meta{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--border);background:color-mix(in oklab,var(--brand) 8%,transparent);border-radius:999px;color:var(--text);font-size:14px;box-shadow:inset 0 0 12px color-mix(in oklab,var(--brand) 10%,transparent);margin-bottom:20px}
+		.blog-meta-dot{width:8px;height:8px;border-radius:999px;background:var(--brand);box-shadow:0 0 6px color-mix(in oklab,var(--brand) 60%,transparent);animation:pulse 1.4s infinite ease-in-out}
+		.blog-title{margin:14px 0 12px;font-size:clamp(28px,4vw,42px);line-height:1.1;text-shadow:0 0 2px var(--brand),0 0 12px color-mix(in oklab,var(--brand) 35%,transparent)}
+		.blog-subtitle{color:var(--muted);max-width:720px;margin:0 auto;font-size:18px}
+		.article{max-width:800px;margin:0 auto;padding:0 20px 60px}
+		.article h2{margin:40px 0 16px;font-size:24px;color:var(--brand);text-shadow:0 0 6px color-mix(in oklab,var(--brand) 22%,transparent)}
+		.article h3{margin:32px 0 12px;font-size:20px;color:var(--text)}
+		.article p{margin:16px 0;color:var(--text)}
+		.article ul{margin:16px 0;padding-left:24px}
+		.article li{margin:8px 0;color:var(--text)}
+		.article strong{color:var(--brand);text-shadow:0 0 4px color-mix(in oklab,var(--brand) 25%,transparent)}
+		.highlight-box{background:color-mix(in oklab,var(--accent) 45%,transparent);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:var(--radius-sm);padding:16px;margin:20px 0;box-shadow:inset 0 0 12px color-mix(in oklab,var(--brand) 6%,transparent)}
+		.footer{padding:28px 0 48px;color:var(--muted);text-align:center}
+		.footer .links{display:flex;gap:12px;justify-content:center;margin-bottom:10px}
+		.footer a{color:var(--muted)}
+		.footer a:hover{color:var(--text);text-shadow:0 0 6px color-mix(in oklab,var(--brand) 25%,transparent)}
+		@keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.85);opacity:.6}}
+		@media (max-width:720px){.nav-inner{height:60px}.blog-header{padding:52px 0 24px}.article{padding:0 16px 40px}}
+	</style>
+</head>
+<body>
+	<header class="nav">
+		<div class="container nav-inner" role="navigation" aria-label="Main">
+			<a href="Landing.html" class="brand">
+				<span class="brand-mark" aria-hidden="true"></span>
+				<span>My Blog</span>
+			</a>
+			<nav class="nav-links" aria-label="Primary">
+				<a href="Landing.html#latest">Latest</a>
+				<a href="Landing.html#categories">Categories</a>
+				<a href="Landing.html#about">About</a>
+				<a href="Landing.html#contact">Contact</a>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<header class="blog-header container">
+			<div class="blog-meta">
+				<span class="blog-meta-dot"></span>
+				<span>Data Structures & Algorithms • Journey • 2025</span>
+			</div>
+			<h1 class="blog-title">My DSA Journey So Far</h1>
+			<p class="blog-subtitle">A practical snapshot of fundamentals I use to write faster, leaner solutions — with where I’m heading next.</p>
+		</header>
+
+		<article class="article">
+			<div class="highlight-box">
+				<p><strong>TL;DR:</strong> Prefer clarity first, then optimize. Know your constraints, pick the right structure, and control complexity: aim for O(n) over O(n²), O(log n) over O(n), and constant‑factor wins only after profiling.</p>
+			</div>
+
+			<div class="highlight-box" style="display:flex;flex-direction:column;gap:10px">
+				<p style="margin:0"><strong>Explore my DSA solutions on GitHub</strong></p>
+				<p style="margin:0;color:var(--muted)">Browse solved LeetCode problems, approaches, and notes. Contributions and feedback are welcome.</p>
+				<p style="margin:0">
+					<a class="repo-link" href="https://github.com/Adarsh2709/DSA-leetcode" target="_blank" rel="noopener">
+						<span aria-hidden="true">🔗</span> DSA-leetcode on GitHub
+					</a>
+				</p>
+			</div>
+
+			<h2>📦 Arrays</h2>
+			<p>Contiguous memory with O(1) indexing; the workhorse for iteration patterns.</p>
+			<ul>
+				<li><strong>Use for</strong>: prefix sums, sliding windows, two pointers, difference arrays</li>
+				<li><strong>Complexity anchors</strong>: random access O(1), insert/delete middle O(n)</li>
+				<li><strong>Gotchas</strong>: off‑by‑one, in‑place mutation, boundary conditions</li>
+			</ul>
+
+			<h2>🔠 Strings</h2>
+			<p>Arrays of characters with domain‑specific tricks for search and comparison.</p>
+			<ul>
+				<li><strong>Core</strong>: palindrome checks, anagram maps, frequency tables, rolling hash</li>
+				<li><strong>Patterns</strong>: substring search (KMP/Rabin‑Karp), sliding window for distinct/at‑most‑k</li>
+				<li><strong>Tip</strong>: prefer O(n) single‑pass windows before heavier DP</li>
+			</ul>
+
+			<h2>🔁 Recursion & Recurrence</h2>
+			<p>Decompose problems and formalize state transitions; the basis for divide‑and‑conquer and DP.</p>
+			<ul>
+				<li><strong>Write</strong> the recurrence first; define base cases; prove termination</li>
+				<li><strong>Top‑down vs bottom‑up</strong>: memoization for clarity, tabulation for speed</li>
+				<li><strong>Watch</strong>: stack depth (tail recursion or iterative conversion when needed)</li>
+			</ul>
+
+			<h2>🔦 Bit Manipulation</h2>
+			<p>Compact, fast operations for set logic and parity tricks.</p>
+			<ul>
+				<li><strong>Use</strong>: x & 1 (odd/even), x ^ x = 0 (unique element), x & (x‑1) (drop lowest set bit)</li>
+				<li><strong>Patterns</strong>: subset iteration over bitmasks, bit DP for TSP‑like problems</li>
+				<li><strong>Payoff</strong>: often reduces O(n log n) to O(n) with small constants</li>
+			</ul>
+
+			<h2>🗂️ Linked Lists</h2>
+			<p>Pointer‑based sequences with O(1) head/tail ops when tracked; great for dynamic changes.</p>
+			<ul>
+				<li><strong>Variants</strong>: singly, doubly, circular</li>
+				<li><strong>Classics</strong>: reverse in O(n), detect cycle (Floyd), merge K lists (heap)</li>
+				<li><strong>Use</strong>: LRU caches (with hash map), editor undo history, playlists</li>
+			</ul>
+
+			<h2>🔀 Sorting</h2>
+			<p>Organizing data enables simpler algorithms and faster queries.</p>
+			<ul>
+				<li><strong>Stable</strong>: merge sort O(n log n) — predictable for equal keys</li>
+				<li><strong>In‑place</strong>: quicksort average O(n log n), worst O(n²); randomize/pivot wisely</li>
+				<li><strong>Use sorted</strong> arrays for binary search, two‑pointer unions/intersections</li>
+			</ul>
+
+			<h2>🔍 Binary Search</h2>
+			<p>Halve the search space with a monotonic predicate; more than finding indices.</p>
+			<ul>
+				<li><strong>On arrays</strong>: lower/upper bounds, first/last occurrence</li>
+				<li><strong>On answer</strong>: minimize/maximize a value where feasibility is monotonic</li>
+				<li><strong>Gotchas</strong>: overflow (use mid = l + (r‑l)/2), infinite loops on l/r updates</li>
+			</ul>
+
+			<h2>📚 Stack & Queue</h2>
+			<p>Abstract types with distinct traversal and scheduling semantics.</p>
+			<ul>
+				<li><strong>Stack (LIFO)</strong>: expression evaluation, parentheses, DFS, monotonic stack</li>
+				<li><strong>Queue (FIFO)</strong>: scheduling, BFS (shortest path in unweighted graphs)</li>
+				<li><strong>Variants</strong>: deque (sliding window max), priority queue/heap (k best)</li>
+			</ul>
+
+			<h2>🌟 Why DSA Matters</h2>
+			<ul>
+				<li><strong>Problem solving</strong>: structure thinking; pick the right tool fast</li>
+				<li><strong>Efficiency</strong>: ship features that scale; save time and memory</li>
+				<li><strong>Interviews</strong>: communicate approach, justify trade‑offs, reason about complexity</li>
+				<li><strong>Foundation</strong>: primes you for trees, graphs, tries, DP, and beyond</li>
+			</ul>
+
+			<h2>What’s Next</h2>
+			<ul>
+				<li><strong>Trees & Graphs</strong>: traversals, shortest paths, MSTs, tree DP</li>
+				<li><strong>Heaps & Hashing</strong>: top‑k, frequency maps, custom hashing</li>
+				<li><strong>Dynamic Programming</strong>: knapsack, LIS/LCS, intervals, digit DP</li>
+				<li><strong>Greedy & Backtracking</strong>: exchange arguments, pruning</li>
+				<li><strong>Advanced</strong>: segment trees/Fenwick, tries, DSU, suffix arrays</li>
+			</ul>
+		</article>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="links">
+				<a href="Landing.html">← Back to Home</a>
+				<a href="Landing.html#latest">Latest Posts</a>
+				<a href="Landing.html#subscribe">Subscribe</a>
+			</div>
+			<div>© <span id="year"></span> My Blog. All rights reserved.</div>
+		</div>
+	</footer>
+
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+	</script>
+</body>
+</html>
+
